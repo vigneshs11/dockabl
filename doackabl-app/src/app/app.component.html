@@ -1,0 +1,229 @@
+
+<div class="topnav">
+  <a href="#">GO TO</a>
+</div>
+
+<div>
+ <h4 class="obje"> <span style="color:gray">OBJECTIVES</span> > <b> CREATE OBJECTIVES</b></h4>
+</div>
+
+<div class = "left">
+<ul #progress>
+    <li><div #1 class="node green"></div><p>define Objective</p></li>
+    <li><div  class="divider grey"></div></li>
+    <li><div  #2 class="node grey"></div><p>KRA</p></li>
+    <li><div  class="divider grey"></div></li>
+    <li><div #3 class="node grey"></div><p>WEIGHTAGE & PRIVACY</p></li>
+    <li><div  class="divider grey"></div></li>
+    <li><div #4 class="node grey"></div><p>SUBMIT</p></li>
+      
+</ul>
+<div class="grid">
+
+<button>SAVE PROGRESS</button>
+</div>
+
+</div>
+<!-- <input type="button" value="Next" id="next"/>
+<input type="button" value="Clear" id="clear"/> -->
+
+<!-- <div class="container">
+  <ul class="progressbar progress vertical">
+      <li class="active">DEFINE OBJECTIVE</li>
+      <li>KRA</li>
+      <li>WEIGHTAGE & PRIVACY</li>
+      <li>SUBMIT</li>
+</ul> -->
+
+<br>
+
+<div class="form" >
+  
+<mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          DEFINE OBJECTIVE
+        </mat-panel-title>
+        
+      </mat-expansion-panel-header>
+      <div class="container1">
+      <p>
+          <mat-form-field appearance="standard" style="width:500px">
+            <mat-label>Enter Title</mat-label>
+            <input matInput [formControl]="userTitle" required>
+            <mat-error *ngIf="userTitle.invalid">Title is required</mat-error>
+            
+            
+          </mat-form-field>
+          
+          
+        </p>
+        <!-- <div *ngIf="userForm.controls['title'].errors.required">
+            Name is required.
+          </div> -->
+
+        
+        <mat-label><h3>Description</h3></mat-label>
+
+        <p class="textarea">
+            <mat-form-field appearance="outline" style="width:500px">
+              
+              <textarea matInput>Wikipedia is a free, open content online encyclopedia created through the collaborative effort of a community of users known as Wikipedians. Anyone registered on the site can create an article for publication; 
+              registration is not required to edit articles.</textarea>
+              
+              
+            </mat-form-field>
+
+            
+          </p>
+
+          <mat-label><h3>Timeline</h3></mat-label>
+
+          <div class="date">
+
+          <mat-form-field style="width:250px" appearance="outline">
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field style="width:250px" appearance="outline">
+                <input matInput  placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix ></mat-datepicker-toggle>
+                <mat-datepicker ></mat-datepicker>
+              </mat-form-field>
+            </div>
+        </div>
+
+
+        <mat-label><h3>Owner</h3></mat-label>
+
+        <mat-form-field appearance="outline" style="width:250px">
+            
+           
+                <mat-select [(value)]="selected" >
+              <mat-option value="individual">Individual</mat-option>
+              <mat-option value="shared" >Shared</mat-option>
+              <mat-option value="multiple">Multiple</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <p>
+            <mat-form-field appearance="legacy" style="width:500px">
+              <mat-select [(value)]="user">
+                
+              <mat-option  *ngFor = "let user of userList" [value]="user.name">
+                <img  class="logo" src = {{user.image}}>
+                {{user.name}}
+              </mat-option>
+            </mat-select>
+              
+              
+            </mat-form-field>
+
+
+          </p>
+
+
+          <div *ngIf= "selected != 'individual'">
+              <h5 style="float:right;color:gray;">+ ADD PEOPLE</h5>
+          </div> 
+
+
+
+          <mat-label><h3>Alignments</h3></mat-label>
+        <mat-form-field appearance="outline" style="width:250px">
+            
+           
+                <mat-select [(value)]="alignment" matInput [formControl]="userSkill" required>
+              <mat-option value=1>FUNCTIONAL SKILLS</mat-option>
+              <mat-option value=2 >BSC CATEGORY</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="userSkill.invalid && userSkill.touched">Please choose an alignment</mat-error>
+
+          <div *ngIf = "alignment == 1 else elseBlock">
+
+          <mat-radio-group style="display:grid">
+              <!-- <mat-radio-button *ngFor = "let skill of funcSkills">{{skill}}</mat-radio-button>-->
+               <mat-radio-button value=1>engineering</mat-radio-button> 
+               <mat-radio-button value=2>sales</mat-radio-button>
+               <mat-radio-button value =3>design</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <ng-template #elseBlock>
+            <div >
+              <mat-radio-group style="display:grid" >
+                  <mat-radio-button *ngFor = "let skill of bscCategory" [value] = skill >{{skill}}</mat-radio-button>
+              
+         </mat-radio-group>
+        </div>
+          </ng-template>
+
+          <mat-action-row>
+            
+              <button mat-button color="primary" (click)="nextStep()">Next</button>
+            
+          </mat-action-row>
+        
+      </mat-expansion-panel>
+  
+      
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false"
+                         [expanded]="step === 1" 
+                         (opened)="setStep(1)" hideToggle>
+                         
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          KEY RESULT AREAS
+        </mat-panel-title>
+        
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+         <mat-label>Enter Title</mat-label>
+          <input matInput placeholder="Enter Title">
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+              WEIGHTAGE & PRIVACY
+          </mat-panel-title>
+          
+        </mat-expansion-panel-header>
+          <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">End</button>
+      </mat-action-row>
+      </mat-expansion-panel>
+
+  </mat-accordion>
+
+  <button type="button" class="bclear" disabled >CLEAR FORM</button>
+  
+  <button type="button" class="bsubmit" >SUBMIT FORM</button>
+ 
+  
+</div>
+<!-- 
+<div class="summary col-s-12 col-3">
+<h4 class="header4">SUMMARY</h4>
+
+<button class="bsubmit" style="width: 100%;
+/* position: relative; */
+margin-top: 180px;">SAVE PROGRESS</button>
+</div> -->
+
+
+
